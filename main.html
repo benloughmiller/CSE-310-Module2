@@ -60,28 +60,29 @@
 
         <div id="map"></div>
     </div>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=APIKEY&libraries=places"></script>
+    <!--The API key is hidden in publications to GitHub. Per the instructions I was given, the video tutorial will suffice-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCLFkQwEx-7X1zB3oJoPssiF3Ytsf55rU&libraries=places"></script>
     <script>
         let map;
         let directionsService;
         let directionsRenderer;
         let savedRoutes = [];
 
+        //This function initializes the map and navigation services and loads any routes saved in memory
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 37.7749, lng: -122.4194 }, // Default to San Francisco
-                zoom: 13,
+                center: { lat: 43.8145, lng: -111.7833 }, zoom: 15
             });
-
             directionsService = new google.maps.DirectionsService();
             directionsRenderer = new google.maps.DirectionsRenderer();
             directionsRenderer.setMap(map);
 
-            loadSavedRoutes(); // Load saved routes from localStorage
+            loadSavedRoutes();
             getRouteCount();
         }
-
+        
+        //This function initiates the process to save the routes. 
+        //It gathers the info together and inputs it into the calculateRoute function
         function calculateAndSaveRoute() {
             const origin = document.getElementById('origin').value;
             const destination = document.getElementById('destination').value;
@@ -89,14 +90,15 @@
             const waypoints = waypointsInput.split(',').map((wp) => wp.trim()).filter((wp) => wp);
 
             if (origin && destination) {
-                // Start recursive route calculation
-                calculateRouteRecursive(origin, waypoints, destination, 0);
-            } else {
+                calculateRoute(origin, waypoints, destination, 0);
+            } 
+            else {
                 alert('Please enter both starting and destination addresses.');
             }
         }
 
-        function calculateRouteRecursive(origin, waypoints, destination, index) {
+        //This function calculates the route. If the route has any waypoints, it uses recursion to find the path between the starting point, waypoint, and destination.
+        function calculateRoute(origin, waypoints, destination, index) {
             const nextStop = index < waypoints.length ? waypoints[index] : destination;
             const request = {
                 origin: origin,
@@ -109,19 +111,20 @@
                     directionsRenderer.setDirections(result);
 
                     if (index < waypoints.length) {
-                        // Recursively call the next segment of the journey
-                        calculateRouteRecursive(nextStop, waypoints, destination, index + 1);
-                    } else {
-                        // End of route, save the complete journey
+                        calculateRoute(nextStop, waypoints, destination, index + 1);
+                    } 
+                    else {
                         saveRoute(origin, destination, waypoints);
                         displayOutput(`Route saved from ${origin} to ${destination} with waypoints: ${waypoints.join(', ')}.`);
                     }
-                } else {
+                } 
+                else {
                     alert('Directions request failed due to ' + status);
                 }
             });
         }
 
+        //This function saves the route 
         function saveRoute(origin, destination, waypoints) {
             savedRoutes.push({ origin, destination, waypoints });
             saveRoutesToLocalStorage();
@@ -129,13 +132,15 @@
             getRouteCount();
         }
 
+        //This function displays the number of routes saved
         function getRouteCount() {
             const routeCount = savedRoutes.length;
             const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear the output area before displaying the updated count
+            outputDiv.innerHTML = '';
             displayOutput(`Total saved routes: ${routeCount}`);
         }
 
+        //This function adds routes to the navigation history
         function updateNavHistory() {
             const navHistoryDiv = document.getElementById('navHistory');
             navHistoryDiv.innerHTML = '';
@@ -143,12 +148,13 @@
             savedRoutes.forEach((route, index) => {
                 const routeElement = document.createElement('div');
                 routeElement.className = 'saved-route';
-                routeElement.textContent = `${route.origin} ➔ ${route.destination}`;
+                routeElement.textContent = `${route.origin} -> ${route.destination}`;
                 routeElement.onclick = () => displaySavedRoute(route);
                 navHistoryDiv.appendChild(routeElement);
             });
         }
 
+        //This function shows a route saved in memory
         function displaySavedRoute(route) {
             const request = {
                 origin: route.origin,
@@ -160,16 +166,19 @@
             directionsService.route(request, (result, status) => {
                 if (status === 'OK') {
                     directionsRenderer.setDirections(result);
-                } else {
+                } 
+                else {
                     alert('Directions request failed due to ' + status);
                 }
             });
         }
 
+        //This function saves routes to local storage, saving them in case of a refresh
         function saveRoutesToLocalStorage() {
             localStorage.setItem('savedRoutes', JSON.stringify(savedRoutes));
         }
 
+        //This function loads routes from local storage
         function loadSavedRoutes() {
             const storedRoutes = localStorage.getItem('savedRoutes');
             if (storedRoutes) {
@@ -178,14 +187,13 @@
             }
         }
 
-        // Function to display output messages
+        //This function displays output messages
         function displayOutput(message) {
             const outputDiv = document.getElementById('output');
             outputDiv.innerHTML += `<p>${message}</p>`;
             console.log(message); // Log to console as well
         }
 
-        // Load the map when the page loads
         window.onload = initMap;
     </script>
 </body>
