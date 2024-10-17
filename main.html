@@ -61,7 +61,7 @@
         <div id="map"></div>
     </div>
     <!--The API key is hidden in publications to GitHub. Per the instructions I was given, the video tutorial will suffice-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCLFkQwEx-7X1zB3oJoPssiF3Ytsf55rU&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=APIKEY&libraries=places"></script>
     <script>
         let map;
         let directionsService;
@@ -80,7 +80,7 @@
             loadSavedRoutes();
             getRouteCount();
         }
-        
+
         //This function initiates the process to save the routes. 
         //It gathers the info together and inputs it into the calculateRoute function
         function calculateAndSaveRoute() {
