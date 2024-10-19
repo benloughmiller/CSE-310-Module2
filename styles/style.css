@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+#header {
+    background-color: #759ca3;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+#content {
+    display: flex;
+    flex: 1;
+}
+
+#sidebar {
+    width: 300px;
+    padding: 15px;
+    background-color: #87b5bd;
+    border-right: 5px solid #759ca3;
+}
+
+#map {
+    height: 100vh;
+    flex: 1;
+}
+
+.saved-route {
+    background-color: #e6e6e6;
+    margin: 5px 0;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.saved-route:hover {
+    background-color: #d4d4d4;
+}
