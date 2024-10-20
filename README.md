@@ -1,32 +1,24 @@
 # Overview
 
-{Important! Do not say in this section that this is college assignment. Talk about what you are trying to accomplish as a software engineer to further your learning.}
+This software uses the Google Maps API to serve as a basic route finder. You can enter a starting point, any waypoints that you would like, and a destination, and the program will find an optimized route for you to follow. It will also save the route in your browser's history so that you can load the route later. It also keeps a tally of how many routes you've generated. 
 
-{Provide a description of the software that you wrote to demonstrate the JavaScript language.}
+This program is designed to be an introductory program to using the Google Maps API.
+Many programs use it in their navigation features, and it is a useful skill to know.
 
-{Describe your purpose for writing this software.}
 
-{Provide a link to your YouTube demonstration. It should be a 4-5 minute demo of the software running and a walkthrough of the code. Focus should be on sharing what you learned about the language syntax.}
-
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/jH3wCz4J8-8)
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
-
-{Describe the programming language that you used and any libraries.}
+I used vanilla JavaScript for the backend of this program and HTML/CSS for the front end. I utilized the Google Maps API for navigating and displaying routes. 
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-
-- [Web Site Name](http://url.link.goes.here)
-- [Web Site Name](http://url.link.goes.here)
+- [Google Maps JavaScript Documentation](https://developers.google.com/maps/documentation/javascript)
+- [Mozilla JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-
-- Item 1
-- Item 2
-- Item 3
+- Add an ability to delete items
+- Display waypoints in the saved routes list
+- Show travel time for the route

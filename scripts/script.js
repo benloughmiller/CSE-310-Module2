@@ -122,7 +122,6 @@ let map;
         function displayOutput(message) {
             const outputDiv = document.getElementById('output');
             outputDiv.innerHTML += `<p>${message}</p>`;
-            console.log(message); // Log to console as well
         }
 
         window.onload = initMap;
